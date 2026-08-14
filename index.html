@@ -550,12 +550,8 @@
   var SESSION_ROLE_KEY = 'sr7_role';
   var rtcConfig = {
     iceServers: [
-      { urls: 'stun:154.12.89.175:3478' },
       {
-        urls: [
-          'turn:154.12.89.175:3478?transport=tcp',
-          'turn:154.12.89.175:3478'
-        ],
+        urls: 'turn:154.12.89.175:3478?transport=tcp',
         username: 'sr7turn',
         credential: 'xjcCv3kakCg80R3pvNwZ2Xn8'
       }
@@ -761,10 +757,9 @@
       if (!peer) { resolve(); return; }
       if (peer.iceGatheringState === 'complete') { resolve(); return; }
       var done = false;
-      // Wait for gathering to finish (up to 15s) so TURN relay candidates
-      // collected later are included in the code. A short fixed timeout
-      // would cut them off on slow mobile networks and break cross-network links.
-      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 15000);
+      // Wait for ICE gathering to finish (up to 8s). With TURN-over-TCP the
+      // relay candidate is usually ready within a second or two.
+      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 8000);
       peer.addEventListener('icegatheringstatechange', function h() {
         if (peer.iceGatheringState === 'complete' && !done) {
           done = true; clearTimeout(timer);
