@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARRAIDERS ★ FAN HQ — Est. 1986</title>
+<meta name="description" content="The unofficial STARRAIDERS fan page. High scores, lore and fan club.">
+<style>
+  :root{
+    --bg:#050505;
+    --green:#33ff66;
+    --green-dim:#1d9c40;
+    --green-dark:#0b3d1a;
+    --amber:#ffb000;
+    --red:#ff4444;
+    --paper:#0d0d0d;
+    --mono:"Courier New",Courier,"Lucida Console",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--green);
+    font-family:var(--mono);line-height:1.65;
+    -webkit-font-smoothing:none;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--green);color:#000}
+  a{color:var(--amber);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font-family:inherit;cursor:pointer}
+  input,textarea{font-family:inherit}
+
+  /* CRT scanlines + vignette */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:9997;pointer-events:none;
+    background:radial-gradient(ellipse at center,transparent 62%,rgba(0,0,0,.55) 100%);
+  }
+  .flicker{animation:flicker 4s infinite}
+  @keyframes flicker{
+    0%,95%,100%{opacity:1}
+    96%{opacity:.82}
+    97%{opacity:1}
+    98%{opacity:.9}
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  .hidden{display:none!important}
+
+  .glow{text-shadow:0 0 6px rgba(51,255,102,.65)}
+  .amber-glow{color:var(--amber);text-shadow:0 0 6px rgba(255,176,0,.55)}
+
+  /* ============ FAN PAGE ============ */
+  #fanpage{position:relative;z-index:1}
+
+  .masthead{
+    border-bottom:2px solid var(--green-dark);
+    padding:26px 0 20px;text-align:center;
+  }
+  .masthead .stars{color:var(--green-dim);font-size:13px;letter-spacing:.4em}
+  .masthead h1{
+    font-size:clamp(30px,7vw,58px);letter-spacing:.12em;
+    margin:8px 0 6px;
+  }
+  .masthead .tag{color:var(--amber);font-size:13px;letter-spacing:.3em;text-transform:uppercase}
+
+  .hero-ship{
+    text-align:center;padding:44px 0 10px;
+    color:var(--green);font-size:clamp(8px,2.1vw,15px);line-height:1.25;
+    white-space:pre;overflow-x:auto;
+  }
+  .hero-sub{
+    text-align:center;color:var(--green-dim);font-size:14px;
+    padding:18px 0 8px;letter-spacing:.08em;
+  }
+  .hero-sub b{color:var(--green)}
+
+  .fan-section{padding:56px 0;border-top:1px dashed var(--green-dark)}
+  .fan-section h2{
+    font-size:20px;letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:22px;color:var(--amber);
+  }
+  .fan-section h2::before{content:"▚ ";color:var(--green)}
+
+  .lore p{color:#baffcd;max-width:70ch;margin-bottom:14px;font-size:15px}
+  .lore p:first-letter{color:var(--amber)}
+
+  table.scores{width:100%;border-collapse:collapse;font-size:15px}
+  .scores th{
+    text-align:left;color:var(--green-dim);letter-spacing:.18em;font-size:12px;
+    text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--green-dark);
+  }
+  .scores td{padding:9px 10px;border-bottom:1px dotted var(--green-dark)}
+  .scores tr:hover td{background:rgba(51,255,102,.06)}
+  .scores .rank{color:var(--amber);width:44px}
+  .scores .pts{text-align:right;white-space:nowrap}
+  .scores .note{color:var(--green-dim);font-size:12px}
+
+  .wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+  .pixel-card{
+    border:1px solid var(--green-dark);background:var(--paper);
+    padding:16px;text-align:center;
+  }
+  .pixel-art{
+    height:110px;display:flex;align-items:center;justify-content:center;
+    white-space:pre;font-size:11px;line-height:1.2;color:var(--green);
+    background:#020202;border:1px solid var(--green-dark);margin-bottom:12px;overflow:hidden;
+  }
+  .pixel-card .caption{color:var(--green-dim);font-size:13px}
+
+  .club-box{
+    border:2px solid var(--amber);background:rgba(255,176,0,.05);
+    padding:34px 30px;text-align:center;max-width:640px;margin:0 auto;
+  }
+  .club-box h3{color:var(--amber);font-size:18px;letter-spacing:.2em;margin-bottom:12px}
+  .club-box p{color:#ffd27a;font-size:14px;max-width:52ch;margin:0 auto 22px}
+  .club-box .hint{color:var(--green-dim);font-size:12px;margin-top:16px}
+  .btn-retro{
+    background:#000;color:var(--amber);border:1px solid var(--amber);
+    padding:13px 34px;font-size:14px;letter-spacing:.25em;text-transform:uppercase;
+    transition:background .2s,color .2s,box-shadow .2s;
+  }
+  .btn-retro:hover{background:var(--amber);color:#000;box-shadow:0 0 18px rgba(255,176,0,.5)}
+  .btn-green{
+    background:#000;color:var(--green);border:1px solid var(--green);
+    padding:10px 22px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    transition:background .2s,color .2s;
+  }
+  .btn-green:hover{background:var(--green);color:#000}
+  .btn-green.danger{color:var(--red);border-color:var(--red)}
+  .btn-green.danger:hover{background:var(--red);color:#000}
+  .btn-green:disabled,.btn-retro:disabled{opacity:.4;cursor:not-allowed}
+
+  .fan-footer{
+    border-top:2px solid var(--green-dark);padding:34px 0 46px;
+    text-align:center;color:var(--green-dim);font-size:12px;
+  }
+  .fan-footer .whisper{
+    display:block;margin-top:14px;color:#2c2c2c;font-size:11px;letter-spacing:.06em;
+    transition:color .4s;
+  }
+  .fan-footer .whisper:hover{color:#5a5a5a}
+
+  /* ============ ACCESS MODAL ============ */
+  #accessModal{
+    position:fixed;inset:0;z-index:9000;
+    background:rgba(0,0,0,.88);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .terminal-box{
+    width:100%;max-width:520px;background:#020202;
+    border:1px solid var(--green-dark);
+    box-shadow:0 0 40px rgba(51,255,102,.15);
+  }
+  .terminal-title{
+    background:var(--green-dark);color:var(--green);
+    font-size:12px;letter-spacing:.25em;padding:9px 14px;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .terminal-title .close-x{background:none;border:none;color:var(--green);font-size:16px;line-height:1}
+  .terminal-body{padding:26px 24px 30px}
+  .terminal-body .sys{color:var(--green-dim);font-size:13px;margin-bottom:18px}
+  .terminal-body .sys b{color:var(--green)}
+  .pass-input{
+    width:100%;background:#000;border:1px solid var(--green-dark);color:var(--green);
+    font-size:18px;letter-spacing:.3em;text-transform:uppercase;
+    padding:14px 16px;text-align:center;caret-color:var(--green);
+  }
+  .pass-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 14px rgba(51,255,102,.3)}
+  .pass-error{
+    color:var(--red);font-size:13px;min-height:22px;margin-top:12px;
+    text-shadow:0 0 6px rgba(255,68,68,.5);
+  }
+  .access-actions{margin-top:16px;display:flex;gap:12px;justify-content:center}
+  .shake{animation:shake .45s}
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-10px)}
+    40%{transform:translateX(9px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(4px)}
+  }
+
+  /* ============ HANDSHAKE ============ */
+  #handshake{
+    position:fixed;inset:0;z-index:9500;background:#000;
+    padding:8vh 20px;overflow:hidden;
+  }
+  #handshake pre{
+    max-width:760px;margin:0 auto;font-size:clamp(12px,1.8vw,15px);
+    color:var(--green);white-space:pre-wrap;word-break:break-word;
+    text-shadow:0 0 8px rgba(51,255,102,.5);
+  }
+  .cursor-blink::after{content:"█";animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ============ LINK ROOM ============ */
+  #linkroom{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column}
+  .bbs-header{
+    border-bottom:1px solid var(--green-dark);padding:14px 0;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+  }
+  .bbs-header .chan{font-size:14px;letter-spacing:.14em}
+  .bbs-header .chan b{color:var(--amber)}
+  .bbs-header .status{font-size:12px;color:var(--green-dim)}
+  .bbs-header .status .dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--green);margin-right:6px;box-shadow:0 0 8px var(--green);
+    animation:blink 2s steps(1) infinite;
+  }
+  .bbs-header .status .dot.off{background:#553;box-shadow:none;animation:none}
+
+  .link-body{flex:1;max-width:900px;width:100%;margin:0 auto;padding:26px 20px 10px}
+
+  .panel{
+    border:1px solid var(--green-dark);background:#020202;
+    padding:24px;margin-bottom:20px;
+  }
+  .panel h3{
+    color:var(--amber);font-size:15px;letter-spacing:.2em;text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .panel h3::before{content:"▚ ";color:var(--green)}
+  .panel p.desc{color:var(--green-dim);font-size:13px;margin-bottom:16px;max-width:70ch}
+  .panel p.desc b{color:var(--green)}
+
+  .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .role-card{
+    border:1px solid var(--green-dark);background:#010101;padding:26px 22px;
+    display:flex;flex-direction:column;gap:12px;text-align:left;
+    transition:border-color .2s,background .2s;
+  }
+  .role-card:hover{border-color:var(--green);background:rgba(51,255,102,.04)}
+  .role-card .rt{color:var(--amber);font-size:15px;letter-spacing:.18em;text-transform:uppercase}
+  .role-card .rd{color:var(--green-dim);font-size:13px}
+
+  .code-area{
+    width:100%;background:#000;border:1px solid var(--green-dark);color:var(--green);
+    font-size:12px;padding:12px;resize:vertical;caret-color:var(--green);
+    word-break:break-all;min-height:90px;
+  }
+  .code-area:focus{outline:none;border-color:var(--green)}
+  .code-area[readonly]{color:#8fd8a4}
+  .field-label{
+    display:block;color:var(--green-dim);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;margin:16px 0 8px;
+  }
+  .row-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+
+  .statusline{
+    border:1px dashed var(--green-dark);padding:12px 16px;margin:16px 20px 24px;
+    font-size:13px;color:var(--green);min-height:44px;
+    max-width:900px;
+  }
+  .statusline.err{color:var(--red);border-color:var(--red)}
+  .statusline.ok{color:var(--green);border-color:var(--green)}
+  .link-body .statusline{margin:16px 0}
+
+  .step-note{
+    color:var(--amber);font-size:13px;background:rgba(255,176,0,.06);
+    border-left:3px solid var(--amber);padding:10px 14px;margin:14px 0;
+  }
+
+  /* invite slots (hub) */
+  .invite-item{
+    border:1px dashed var(--green-dark);background:#010101;
+    padding:14px;margin-top:14px;
+  }
+  .invite-head{
+    display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:10px;
+  }
+  .invite-state{color:var(--green-dim)}
+  .invite-item .code-area{min-height:64px}
+
+  /* connected chat */
+  .bbs-main{display:flex;gap:22px;max-width:1060px;width:100%;margin:0 auto;padding:22px 20px}
+  .roster{
+    width:210px;flex-shrink:0;border:1px solid var(--green-dark);
+    background:#020202;padding:14px;height:fit-content;
+  }
+  .roster h4{font-size:11px;letter-spacing:.25em;color:var(--green-dim);margin-bottom:12px;text-transform:uppercase}
+  .roster ul{list-style:none;font-size:13px}
+  .roster li{padding:5px 0;color:var(--green)}
+  .roster li::before{content:"▸ ";color:var(--green-dim)}
+  .roster li.me{color:var(--amber)}
+  .roster li.bot{color:var(--green)}
+  .chat-panel{flex:1;display:flex;flex-direction:column;min-width:0}
+  .chat-log{
+    border:1px solid var(--green-dark);background:#010101;
+    height:min(56vh,460px);overflow-y:auto;padding:16px 18px;
+    font-size:14px;scroll-behavior:smooth;
+  }
+  .msg{margin-bottom:12px;word-break:break-word}
+  .msg .meta{color:var(--green-dim);font-size:12px;margin-right:8px}
+  .msg .who{color:var(--amber);font-weight:bold}
+  .msg.peer .who{color:var(--green)}
+  .msg.sys .who{color:var(--green-dim)}
+  .msg.sys .txt{color:#8fd8a4}
+  .msg .txt{color:#d7ffe3}
+  .chat-input-row{display:flex;gap:10px;margin-top:14px}
+  .chat-input{
+    flex:1;background:#000;border:1px solid var(--green-dark);color:var(--green);
+    font-size:15px;padding:12px 14px;caret-color:var(--green);
+  }
+  .chat-input:focus{outline:none;border-color:var(--green)}
+  .bbs-footer{
+    border-top:1px dashed var(--green-dark);padding:14px 0 20px;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    max-width:1060px;width:100%;margin:0 auto;
+  }
+  .bbs-footer .notice{font-size:11px;color:#3a5a44;letter-spacing:.05em;max-width:60ch}
+
+  @media (max-width:760px){
+    .role-grid{grid-template-columns:1fr}
+    .bbs-main{flex-direction:column}
+    .roster{width:100%}
+    .chat-log{height:48vh}
+  }
+</style>
+</head>
+<body class="flicker">
+
+<!-- ================= FAN PAGE (COVER) ================= -->
+<div id="fanpage">
+  <header class="masthead">
+    <div class="wrap">
+      <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+      <h1 class="glow">STARRAIDERS</h1>
+      <div class="tag">★ The Unofficial Fan HQ — Est. 1986 ★</div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <pre class="hero-ship glow" aria-hidden="true">
+        .    *        .          ✦
+   ✦        ______
+     .     /|_||_\`\.        *
+   *      (   _    _  )
+     .    =(_)=-(_)=-)    .        ✦
+        .     *        .
+</pre>
+    <p class="hero-sub">THE #1 UNOFFICIAL SHRINE TO THE <b>1986 ARCADE LEGEND</b> · MAINTAINED BY PILOTS, FOR PILOTS</p>
+  </div>
+
+  <main class="wrap">
+    <section class="fan-section lore" id="lore">
+      <h2>Transmission 01 // The Legend</h2>
+      <p>In the summer of 1986, a cabinet appeared in exactly eleven arcades across three continents. No distributor. No serial number. Just a marquee that read STARRAIDERS and a joystick worn smooth by the first brave hands.</p>
+      <p>Players whispered that the attract mode whispered back. That Level 13 didn't exist until someone believed hard enough to find it. The cabinet vanished in 1989 — but the signal, as any true pilot knows, never really stopped.</p>
+      <p>This page keeps the flame lit. High scores. Lore. Fan art. And for those who have earned it… something else.</p>
+    </section>
+
+    <section class="fan-section" id="scores">
+      <h2>Transmission 02 // Hall of Fame</h2>
+      <table class="scores">
+        <thead>
+          <tr><th class="rank">#</th><th>Callsign</th><th class="pts">Score</th><th class="note">Note</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rank">1</td><td>VOIDRUNNER</td><td class="pts">9,881,500</td><td class="note">Level 13 confirmed??</td></tr>
+          <tr><td class="rank">2</td><td>R.F.</td><td class="pts">8,407,198</td><td class="note">flies at midnight</td></tr>
+          <tr><td class="rank">3</td><td>GHOSTFREQ</td><td class="pts">7,720,034</td><td class="note">never seen in daylight</td></tr>
+          <tr><td class="rank">4</td><td>NIGHTOWL</td><td class="pts">6,914,220</td><td class="note">3-coin clear</td></tr>
+          <tr><td class="rank">5</td><td>CRT_GHOST</td><td class="pts">5,106,660</td><td class="note">attract-mode legend</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="fan-section" id="wall">
+      <h2>Transmission 03 // Fan Art Wall</h2>
+      <div class="wall">
+        <div class="pixel-card">
+          <pre class="pixel-art">  /\
+ /  \
+|SR  |
+|____|
+/|  |\
+/_|__|\</pre>
+          <div class="caption">"The Falcon Ascends" — by NIGHTOWL</div>
+        </div>
+        <div class="pixel-card">
+          <pre class="pixel-art">✦   ·    ✦
+   ·   ✦
+ ✦   ☄    ·
+    ·    ✦
+·   ✦   ·</pre>
+          <div class="caption">"Sector 9 Debris Field" — by GHOSTFREQ</div>
+        </div>
+        <div class="pixel-card">
+          <pre class="pixel-art">▓▓▓▓▓▓▓
+▓ ▒▒▒ ▓
+▓ ▒█▒ ▓
+▓ ▒▒▒ ▓
+▓▓▓▓▓▓▓</pre>
+          <div class="caption">"The Cabinet" — by CRT_GHOST</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fan-section" id="club">
+      <h2>Transmission 04 // Pilot's Club</h2>
+      <div class="club-box">
+        <h3>★ Members-Only Hangar ★</h3>
+        <p>True pilots know the fan club meets somewhere quieter than this page. If you hold the membership passphrase, the hangar door will open. If you don't… keep flying. The signal rewards the patient.</p>
+        <button class="btn-retro" id="openAccess" data-primary-action>Enter Passphrase</button>
+        <p class="hint">FIELD HINT: the club mascot flies at midnight. Check the Hall of Fame — rank #2 knows the way.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fan-footer">
+    <div class="wrap">
+      <div>STARRAIDERS FAN HQ · EST. 1986 · NO COINS REQUIRED, ONLY BELIEF</div>
+      <div style="margin-top:8px">This is a fan-made tribute page. Not affiliated with any arcade, cabinet, or midnight bird.</div>
+      <span class="whisper" title="...">psst… the red falcon remembers the year this page was founded</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= ACCESS MODAL ================= -->
+<div id="accessModal" class="hidden" role="dialog" aria-modal="true" aria-label="Member passphrase entry">
+  <div class="terminal-box" id="accessBox">
+    <div class="terminal-title">
+      <span>▣ HANGAR DOOR — AUTH REQUIRED</span>
+      <button class="close-x" id="closeAccess" aria-label="Close">✕</button>
+    </div>
+    <div class="terminal-body">
+      <p class="sys">NODE 7 RELAY · <b>SECURE CHANNEL</b><br>Membership passphrase required. Unauthorized access is logged.</p>
+      <input type="password" class="pass-input" id="passInput" placeholder="PASSPHRASE" autocomplete="off" spellcheck="false">
+      <div class="pass-error" id="passError"></div>
+      <div class="access-actions">
+        <button class="btn-retro" id="submitPass" data-primary-action>Authenticate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HANDSHAKE ================= -->
+<div id="handshake" class="hidden">
+  <pre id="handshakeText"></pre>
+</div>
+
+<!-- ================= LINK ROOM ================= -->
+<div id="linkroom" class="hidden">
+  <header class="bbs-header wrap">
+    <div class="chan">NODE 7 — <b>HUB RELAY ROOM</b></div>
+    <div class="status"><span class="dot off" id="linkDot"></span><span id="linkState">OFFLINE</span></div>
+  </header>
+
+  <!-- role selection -->
+  <div class="link-body" id="roleSelect">
+    <div class="panel">
+      <h3>Open or Join a Room</h3>
+      <p class="desc">Serverless group chat over encrypted browser-to-browser links. One pilot acts as the <b>hub</b>: every other pilot links directly to the hub, and the hub relays each message to the whole room. Every pilot↔hub link is individually encrypted (DTLS) — but because the hub relays traffic, <b>the hub can read room messages</b>. Choose a hub you trust.</p>
+      <div class="role-grid">
+        <button class="role-card" id="btnHub">
+          <span class="rt">▸ Open a Room (Hub)</span>
+          <span class="rd">You become the relay. Generate one invite code per pilot. Your tab must stay open for the room to live.</span>
+        </button>
+        <button class="role-card" id="btnJoin">
+          <span class="rt">▸ Join a Room</span>
+          <span class="rd">You received an INVITE CODE from a room's hub. Paste it to link up.</span>
+        </button>
+      </div>
+      <div class="step-note">All pilots must be online at the same time. Refreshing drops your links — you'll be guided through re-linking afterwards.</div>
+    </div>
+  </div>
+
+  <!-- hub flow -->
+  <div class="link-body hidden" id="hubPanel">
+    <div class="panel">
+      <h3>Invite Pilots — You Are the Hub</h3>
+      <p class="desc">Generate one <b>INVITE CODE</b> per pilot and send it to them. When a pilot returns their <b>ACCESS CODE</b>, paste it below — it is matched to the correct slot automatically. Remember: as the hub you relay everything, so all room messages pass through your browser.</p>
+      <div class="row-actions">
+        <button class="btn-retro" id="genInviteBtn" data-primary-action>Generate Invite Code</button>
+      </div>
+      <div id="inviteList"></div>
+      <label class="field-label" for="accessIn">Paste ACCESS CODE from a pilot</label>
+      <textarea class="code-area" id="accessIn" rows="4" placeholder="Paste ACCESS CODE here…"></textarea>
+      <div class="row-actions">
+        <button class="btn-green" id="acceptAccessBtn">Accept &amp; Link</button>
+      </div>
+    </div>
+    <div class="statusline" id="hubStatus">Room closed. Generate invite codes to begin.</div>
+  </div>
+
+  <!-- join flow -->
+  <div class="link-body hidden" id="joinPanel">
+    <div class="panel">
+      <h3>Step 1 — Paste Invite Code</h3>
+      <p class="desc">Paste the INVITE CODE the room's hub sent you, then decode it.</p>
+      <textarea class="code-area" id="offerIn" rows="5" placeholder="Paste INVITE CODE here…"></textarea>
+      <div class="row-actions">
+        <button class="btn-retro" id="decodeBtn" data-primary-action>Decode &amp; Reply</button>
+        <button class="btn-green danger" id="joinCancel1">Cancel</button>
+      </div>
+    </div>
+    <div class="panel hidden" id="joinReplyBox">
+      <h3>Step 2 — Your Access Code</h3>
+      <p class="desc">Send this ACCESS CODE back to the hub. The room link opens automatically once they accept.</p>
+      <textarea class="code-area" id="answerOut" readonly rows="5"></textarea>
+      <div class="row-actions">
+        <button class="btn-green" id="copyAnswer">Copy Code</button>
+      </div>
+    </div>
+    <div class="statusline" id="joinStatus">Waiting for invite code…</div>
+  </div>
+
+  <!-- chat (hub sees it immediately; joiner after link opens) -->
+  <div id="chatArea" class="hidden">
+    <div class="bbs-main">
+      <aside class="roster">
+        <h4>// On Frequency</h4>
+        <ul id="peerList"></ul>
+      </aside>
+      <section class="chat-panel">
+        <div class="chat-log" id="chatLog" aria-live="polite"></div>
+        <div class="chat-input-row">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Type transmission… (Enter to send)" autocomplete="off" maxlength="2000">
+          <button class="btn-green" id="sendBtn">Send</button>
+        </div>
+      </section>
+    </div>
+    <footer class="bbs-footer wrap">
+      <div class="notice">Hub-relayed room. Each pilot↔hub link is DTLS-encrypted; the hub relays (and can read) room traffic. Nothing is stored on any server.</div>
+      <div style="display:flex;gap:10px">
+        <button class="btn-green danger" id="wipeBtn">Wipe Log</button>
+        <button class="btn-green danger hidden" id="closeRoomBtn">Close Room</button>
+        <button class="btn-green danger hidden" id="hangupBtn">Hang Up</button>
+        <button class="btn-green danger" id="exitBtn">Exit</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= CONSTANTS ================= */
+  var PASSPHRASE = 'REDFALCON';
+  var HANDLE_KEY = 'sr7_handle_v2';
+  var LOG_KEY = 'sr7_p2p_log_v3';
+  var SESSION_AUTH_KEY = 'sr7_authed';
+  var SESSION_ROLE_KEY = 'sr7_role';
+  var rtcConfig = {
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' },
+      { urls: 'stun:global.stun.twilio.com:3478' }
+    ]
+  };
+
+  // Callsigns are assigned by the hub in join order (PILOT-01, PILOT-02, …),
+  // so no two pilots in a room ever share a handle.
+  var myHandle = localStorage.getItem(HANDLE_KEY) || 'PILOT';
+
+  /* ---- session state ---- */
+  var mode = null;            // 'hub' | 'join'
+  // member side
+  var memberPc = null;
+  var memberDc = null;
+  var memberConnected = false;
+  var hubHandle = null;
+  var memberRoster = [];
+  // hub side
+  var peers = [];             // invite slots
+  var inviteCounter = 0;
+  var joinCounter = 0;        // sequential callsign assignment
+
+  /* ================= ELEMENTS ================= */
+  var fanpage = document.getElementById('fanpage');
+  var linkroom = document.getElementById('linkroom');
+  var accessModal = document.getElementById('accessModal');
+  var accessBox = document.getElementById('accessBox');
+  var passInput = document.getElementById('passInput');
+  var passError = document.getElementById('passError');
+  var handshake = document.getElementById('handshake');
+  var handshakeText = document.getElementById('handshakeText');
+
+  var roleSelect = document.getElementById('roleSelect');
+  var hubPanel = document.getElementById('hubPanel');
+  var joinPanel = document.getElementById('joinPanel');
+  var chatArea = document.getElementById('chatArea');
+
+  var genInviteBtn = document.getElementById('genInviteBtn');
+  var inviteList = document.getElementById('inviteList');
+  var accessIn = document.getElementById('accessIn');
+  var acceptAccessBtn = document.getElementById('acceptAccessBtn');
+  var hubStatus = document.getElementById('hubStatus');
+
+  var offerIn = document.getElementById('offerIn');
+  var answerOut = document.getElementById('answerOut');
+  var joinReplyBox = document.getElementById('joinReplyBox');
+  var joinStatus = document.getElementById('joinStatus');
+
+  var chatLog = document.getElementById('chatLog');
+  var chatInput = document.getElementById('chatInput');
+  var peerList = document.getElementById('peerList');
+  var linkDot = document.getElementById('linkDot');
+  var linkState = document.getElementById('linkState');
+  var closeRoomBtn = document.getElementById('closeRoomBtn');
+  var hangupBtn = document.getElementById('hangupBtn');
+
+  /* ================= HELPERS ================= */
+  function parseJson(s) {
+    try { return JSON.parse(s); } catch (e) { return null; }
+  }
+  function setStatus(el, text, isErr) {
+    el.textContent = text;
+    el.classList.toggle('err', !!isErr);
+    el.classList.toggle('ok', !isErr);
+  }
+  function setLinkState(on, text) {
+    linkDot.classList.toggle('off', !on);
+    linkState.textContent = text;
+  }
+  function nextCallsign() {
+    joinCounter += 1;
+    return 'PILOT-' + (joinCounter < 10 ? '0' : '') + joinCounter;
+  }
+  function initHubCallsign() {
+    joinCounter = 0;
+    myHandle = nextCallsign();
+    try { localStorage.setItem(HANDLE_KEY, myHandle); } catch (e) {}
+  }
+
+  /* ================= ACCESS MODAL ================= */
+  document.getElementById('openAccess').addEventListener('click', function () {
+    accessModal.classList.remove('hidden');
+    passInput.value = '';
+    passError.textContent = '';
+    setTimeout(function () { passInput.focus(); }, 60);
+  });
+  document.getElementById('closeAccess').addEventListener('click', closeAccess);
+  accessModal.addEventListener('click', function (e) { if (e.target === accessModal) closeAccess(); });
+  function closeAccess() { accessModal.classList.add('hidden'); }
+
+  function tryPassphrase() {
+    var v = passInput.value.trim().toUpperCase();
+    if (v === PASSPHRASE) {
+      accessModal.classList.add('hidden');
+      sessionStorage.setItem(SESSION_AUTH_KEY, '1');
+      startHandshake();
+    } else {
+      passError.textContent = v.length === 0 ? '!! PASSPHRASE REQUIRED' : '!! ACCESS DENIED — ATTEMPT LOGGED';
+      accessBox.classList.remove('shake');
+      void accessBox.offsetWidth;
+      accessBox.classList.add('shake');
+      passInput.value = '';
+      passInput.focus();
+    }
+  }
+  document.getElementById('submitPass').addEventListener('click', tryPassphrase);
+  passInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryPassphrase(); });
+
+  /* ================= HANDSHAKE ================= */
+  var HANDSHAKE_LINES = [
+    '> INITIATING SECURE HANDSHAKE…',
+    '> ROUTING VIA RELAY NODE 7 ………… OK',
+    '> KEY EXCHANGE (ONE-TIME PAD) …… OK',
+    '> MEMBERSHIP CONFIRMED',
+    '> WELCOME BACK, PILOT.',
+    '> OPENING HANGAR DOOR…'
+  ];
+  function startHandshake() {
+    handshake.classList.remove('hidden');
+    handshakeText.textContent = '';
+    var i = 0;
+    function nextLine() {
+      if (i >= HANDSHAKE_LINES.length) { setTimeout(enterLinkRoom, 600); return; }
+      var line = HANDSHAKE_LINES[i];
+      handshakeText.classList.add('cursor-blink');
+      typeLine(line, function () { handshakeText.textContent += '\n'; i += 1; setTimeout(nextLine, 240); });
+    }
+    nextLine();
+  }
+  function typeLine(text, done) {
+    var j = 0;
+    (function tick() {
+      handshakeText.textContent = handshakeText.textContent.replace(/█$/, '');
+      handshakeText.textContent += text.charAt(j);
+      j += 1;
+      if (j < text.length) { setTimeout(tick, 16 + Math.random() * 20); } else { done(); }
+    })();
+  }
+
+  function enterLinkRoom() {
+    handshake.classList.add('hidden');
+    fanpage.classList.add('hidden');
+    linkroom.classList.remove('hidden');
+    document.title = 'NODE 7 — HUB RELAY ROOM';
+    showRoleSelect();
+  }
+
+  /* ================= VIEW SWITCHING ================= */
+  function hideAll() {
+    roleSelect.classList.add('hidden');
+    hubPanel.classList.add('hidden');
+    joinPanel.classList.add('hidden');
+    chatArea.classList.add('hidden');
+  }
+  function showRoleSelect() {
+    hideAll();
+    roleSelect.classList.remove('hidden');
+    closeRoomBtn.classList.add('hidden');
+    hangupBtn.classList.add('hidden');
+  }
+  function showHubRoom() {
+    hideAll();
+    mode = 'hub';
+    hubPanel.classList.remove('hidden');
+    chatArea.classList.remove('hidden');
+    closeRoomBtn.classList.remove('hidden');
+    hangupBtn.classList.add('hidden');
+    renderHubRoster();
+    updateHubStateLine();
+  }
+  function showJoinPanel() {
+    hideAll();
+    mode = 'join';
+    joinPanel.classList.remove('hidden');
+  }
+  function showMemberChat() {
+    hideAll();
+    chatArea.classList.remove('hidden');
+    closeRoomBtn.classList.add('hidden');
+    hangupBtn.classList.remove('hidden');
+    renderMemberRoster();
+  }
+
+  /* ================= CODEC ================= */
+  function encodeDesc(desc) {
+    try {
+      var json = JSON.stringify({ type: desc.type, sdp: desc.sdp });
+      return btoa(unescape(encodeURIComponent(json)));
+    } catch (e) { return ''; }
+  }
+  function decodeDesc(code) {
+    try {
+      var json = decodeURIComponent(escape(atob((code || '').trim())));
+      var obj = JSON.parse(json);
+      if (!obj || !obj.type || !obj.sdp) return null;
+      return { type: obj.type, sdp: obj.sdp };
+    } catch (e) { return null; }
+  }
+
+  function waitForIceGathering(peer) {
+    return new Promise(function (resolve) {
+      if (!peer) { resolve(); return; }
+      if (peer.iceGatheringState === 'complete') { resolve(); return; }
+      var done = false;
+      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 4000);
+      peer.addEventListener('icegatheringstatechange', function h() {
+        if (peer.iceGatheringState === 'complete' && !done) {
+          done = true; clearTimeout(timer);
+          peer.removeEventListener('icegatheringstatechange', h);
+          resolve();
+        }
+      });
+    });
+  }
+
+  function watchPeer(peer, statusEl) {
+    peer.oniceconnectionstatechange = function () {
+      var s = peer.iceConnectionState;
+      if (s === 'failed') {
+        setStatus(statusEl, 'Connection FAILED. The network path is likely too restrictive for a direct link.', true);
+      }
+    };
+  }
+
+  function copyText(textarea, btn) {
+    var val = textarea.value;
+    if (!val) return;
+    function fallback() {
+      textarea.removeAttribute('readonly');
+      textarea.focus(); textarea.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      textarea.setAttribute('readonly', 'readonly');
+      var old = btn.textContent; btn.textContent = 'Copied ✓';
+      setTimeout(function () { btn.textContent = old; }, 1400);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(val).then(function () {
+        var old = btn.textContent; btn.textContent = 'Copied ✓';
+        setTimeout(function () { btn.textContent = old; }, 1400);
+      }).catch(fallback);
+    } else { fallback(); }
+  }
+
+  /* =========================================================
+     HUB SIDE
+     ========================================================= */
+  function openPeerCount() {
+    return peers.filter(function (s) { return s.dc && s.dc.readyState === 'open'; }).length;
+  }
+  function linkedHandles() {
+    return peers
+      .filter(function (s) { return s.dc && s.dc.readyState === 'open' && s.handle; })
+      .map(function (s) { return s.handle; });
+  }
+  function updateHubStateLine() {
+    var n = openPeerCount();
+    if (n > 0) { setLinkState(true, 'ROOM LIVE · ' + n + ' PILOT' + (n > 1 ? 'S' : '') + ' LINKED'); }
+    else { setLinkState(false, 'ROOM OPEN — NO PILOTS LINKED'); }
+  }
+  function broadcast(obj, exceptSlot) {
+    var s = JSON.stringify(obj);
+    peers.forEach(function (slot) {
+      if (slot === exceptSlot) return;
+      if (slot.dc && slot.dc.readyState === 'open') {
+        try { slot.dc.send(s); } catch (e) {}
+      }
+    });
+  }
+  function broadcastRoster() {
+    broadcast({ t: 'roster', hub: myHandle, members: linkedHandles() });
+  }
+
+  function renderHubRoster() {
+    peerList.innerHTML = '';
+    var me = document.createElement('li'); me.className = 'me'; me.textContent = 'YOU (HUB)';
+    peerList.appendChild(me);
+    linkedHandles().forEach(function (h) {
+      var li = document.createElement('li'); li.className = 'bot'; li.textContent = h;
+      peerList.appendChild(li);
+    });
+  }
+
+  function inviteStateText(slot) {
+    if (slot.state === 'gen') return 'GENERATING…';
+    if (slot.state === 'ready') return 'WAITING FOR ACCESS CODE';
+    if (slot.state === 'open') return 'LINK OPEN — AWAITING HELLO';
+    if (slot.state === 'linked') return 'LINKED: ' + slot.handle;
+    return 'CLOSED';
+  }
+
+  function renderInviteList() {
+    inviteList.innerHTML = '';
+    var visible = peers.filter(function (s) { return s.state !== 'closed'; });
+    if (visible.length === 0) { return; }
+    visible.forEach(function (slot) {
+      var box = document.createElement('div');
+      box.className = 'invite-item';
+
+      var head = document.createElement('div');
+      head.className = 'invite-head';
+      var left = document.createElement('span');
+      left.textContent = 'INVITE #' + slot.id;
+      var right = document.createElement('span');
+      right.className = 'invite-state';
+      right.textContent = inviteStateText(slot);
+      head.appendChild(left); head.appendChild(right);
+      box.appendChild(head);
+
+      var ta = document.createElement('textarea');
+      ta.className = 'code-area';
+      ta.rows = 3;
+      ta.readOnly = true;
+      ta.value = slot.code || '';
+      ta.placeholder = slot.state === 'gen' ? 'Generating…' : '';
+      box.appendChild(ta);
+
+      if (slot.code) {
+        var actions = document.createElement('div');
+        actions.className = 'row-actions';
+        var copyBtn = document.createElement('button');
+        copyBtn.className = 'btn-green';
+        copyBtn.type = 'button';
+        copyBtn.textContent = 'Copy Code';
+        copyBtn.addEventListener('click', function () { copyText(ta, copyBtn); });
+        actions.appendChild(copyBtn);
+        box.appendChild(actions);
+      }
+      inviteList.appendChild(box);
+    });
+  }
+
+  function setupHubChannel(slot) {
+    slot.dc.onopen = function () {
+      slot.state = 'open';
+      renderInviteList();
+      updateHubStateLine();
+    };
+    slot.dc.onmessage = function (e) {
+      var m = parseJson(e.data);
+      if (!m) return;
+      if (m.t === 'hello') {
+        slot.handle = nextCallsign();
+        slot.state = 'linked';
+        renderInviteList();
+        renderHubRoster();
+        try { slot.dc.send(JSON.stringify({ t: 'welcome', hub: myHandle, you: slot.handle })); } catch (err) {}
+        appendMsg('SYSTEM', slot.handle + ' joined the room.', 'sys');
+        broadcast({ t: 'sys', x: slot.handle + ' joined the room.' }, slot);
+        broadcastRoster();
+        updateHubStateLine();
+      } else if (m.t === 'msg') {
+        var who = slot.handle || 'PILOT';
+        appendMsg(who, String(m.x || ''), 'peer');
+        broadcast({ t: 'msg', from: who, x: m.x }, slot);
+      }
+    };
+    slot.dc.onclose = function () {
+      var had = slot.handle;
+      var idx = peers.indexOf(slot);
+      if (idx > -1) { peers.splice(idx, 1); }
+      if (had) {
+        appendMsg('SYSTEM', had + ' left the room.', 'sys');
+        broadcast({ t: 'sys', x: had + ' left the room.' });
+        broadcastRoster();
+      }
+      renderInviteList();
+      renderHubRoster();
+      updateHubStateLine();
+    };
+  }
+
+  function generateInvite() {
+    inviteCounter += 1;
+    var slot = { id: inviteCounter, pc: null, dc: null, handle: null, state: 'gen', code: '' };
+    peers.push(slot);
+    renderInviteList();
+
+    try { slot.pc = new RTCPeerConnection(rtcConfig); }
+    catch (err) {
+      slot.state = 'closed';
+      renderInviteList();
+      setStatus(hubStatus, 'This browser does not support WebRTC direct linking.', true);
+      return;
+    }
+    watchPeer(slot.pc, hubStatus);
+    slot.dc = slot.pc.createDataChannel('node7hub', { ordered: true });
+    setupHubChannel(slot);
+
+    slot.pc.createOffer().then(function (offer) {
+      return slot.pc.setLocalDescription(offer);
+    }).then(function () {
+      return waitForIceGathering(slot.pc);
+    }).then(function () {
+      if (!slot.pc || slot.pc.signalingState === 'closed') return;
+      slot.code = encodeDesc(slot.pc.localDescription);
+      slot.state = slot.code ? 'ready' : 'closed';
+      renderInviteList();
+      if (slot.code) {
+        setStatus(hubStatus, 'INVITE #' + slot.id + ' ready. Send it to a pilot and wait for their ACCESS CODE.');
+      } else {
+        setStatus(hubStatus, 'Failed to encode INVITE #' + slot.id + '.', true);
+      }
+    }).catch(function () {
+      slot.state = 'closed';
+      renderInviteList();
+      setStatus(hubStatus, 'Failed to create INVITE #' + slot.id + '.', true);
+    });
+  }
+
+  genInviteBtn.addEventListener('click', generateInvite);
+
+  acceptAccessBtn.addEventListener('click', function () {
+    var desc = decodeDesc(accessIn.value);
+    if (!desc || desc.type !== 'answer') {
+      setStatus(hubStatus, 'Invalid ACCESS CODE — could not decode an answer.', true);
+      return;
+    }
+    var candidates = peers.filter(function (s) {
+      return s.pc && s.pc.signalingState === 'have-local-offer';
+    });
+    if (candidates.length === 0) {
+      setStatus(hubStatus, 'No pending invite slot. Generate an INVITE CODE first.', true);
+      return;
+    }
+    setStatus(hubStatus, 'Matching ACCESS CODE to pending slots…');
+    (function tryNext(i) {
+      if (i >= candidates.length) {
+        setStatus(hubStatus, 'No pending slot accepted this ACCESS CODE. Check it matches a current invite.', true);
+        return;
+      }
+      var slot = candidates[i];
+      slot.pc.setRemoteDescription(desc).then(function () {
+        accessIn.value = '';
+        setStatus(hubStatus, 'ACCESS CODE accepted for INVITE #' + slot.id + ' — waiting for the encrypted channel to open…');
+      }).catch(function () { tryNext(i + 1); });
+    })(0);
+  });
+
+  /* =========================================================
+     MEMBER (JOIN) SIDE
+     ========================================================= */
+  function renderMemberRoster() {
+    peerList.innerHTML = '';
+    var hub = document.createElement('li');
+    hub.className = 'bot';
+    hub.textContent = (hubHandle || 'HUB') + ' (HUB)';
+    peerList.appendChild(hub);
+    memberRoster.forEach(function (h) {
+      var li = document.createElement('li');
+      li.className = h === myHandle ? 'me' : 'bot';
+      li.textContent = h === myHandle ? h + ' (YOU)' : h;
+      peerList.appendChild(li);
+    });
+  }
+
+  function setupMemberChannel(channel) {
+    memberDc = channel;
+    channel.onopen = function () {
+      memberConnected = true;
+      setLinkState(true, 'SECURE LINK ACTIVE');
+      showMemberChat();
+      appendMsg('SYSTEM', 'Linked to the room hub. Your link to the hub is encrypted.', 'sys');
+      try { channel.send(JSON.stringify({ t: 'hello', h: myHandle })); } catch (e) {}
+      chatInput.focus();
+    };
+    channel.onmessage = function (e) {
+      var m = parseJson(e.data);
+      if (!m) return;
+      if (m.t === 'welcome') {
+        hubHandle = m.hub || 'HUB';
+        if (m.you) {
+          myHandle = String(m.you).slice(0, 32);
+          try { localStorage.setItem(HANDLE_KEY, myHandle); } catch (e) {}
+        }
+        renderMemberRoster();
+      } else if (m.t === 'roster') {
+        hubHandle = m.hub || hubHandle;
+        memberRoster = Array.isArray(m.members) ? m.members : [];
+        if (memberRoster.indexOf(myHandle) === -1) { memberRoster.push(myHandle); }
+        renderMemberRoster();
+      } else if (m.t === 'msg') {
+        appendMsg(m.from || 'HUB', String(m.x || ''), 'peer');
+      } else if (m.t === 'sys') {
+        appendMsg('SYSTEM', String(m.x || ''), 'sys');
+      } else if (m.t === 'bye') {
+        appendMsg('SYSTEM', 'The hub closed the room.', 'sys');
+      }
+    };
+    channel.onclose = function () {
+      if (memberConnected) {
+        appendMsg('SYSTEM', 'Link to the hub closed.', 'sys');
+      }
+      memberConnected = false;
+      setLinkState(false, 'LINK OFFLINE');
+    };
+  }
+
+  document.getElementById('btnJoin').addEventListener('click', function () {
+    sessionStorage.setItem(SESSION_ROLE_KEY, 'join');
+    showJoinPanel();
+    joinReplyBox.classList.add('hidden');
+    offerIn.value = '';
+    setStatus(joinStatus, 'Paste the INVITE CODE from the room hub, then press Decode.');
+  });
+  document.getElementById('joinCancel1').addEventListener('click', function () {
+    teardownMember();
+    sessionStorage.removeItem(SESSION_ROLE_KEY);
+    showRoleSelect();
+  });
+
+  document.getElementById('decodeBtn').addEventListener('click', function () {
+    var desc = decodeDesc(offerIn.value);
+    if (!desc || desc.type !== 'offer') {
+      setStatus(joinStatus, 'Invalid INVITE CODE — could not decode an offer.', true);
+      return;
+    }
+    setStatus(joinStatus, 'Decoding & generating access code…');
+    teardownMember();
+    try { memberPc = new RTCPeerConnection(rtcConfig); }
+    catch (err) {
+      setStatus(joinStatus, 'This browser does not support WebRTC direct linking.', true);
+      return;
+    }
+    watchPeer(memberPc, joinStatus);
+    memberPc.ondatachannel = function (e) { setupMemberChannel(e.channel); };
+
+    memberPc.setRemoteDescription(desc).then(function () {
+      return memberPc.createAnswer();
+    }).then(function (answer) {
+      return memberPc.setLocalDescription(answer);
+    }).then(function () {
+      return waitForIceGathering(memberPc);
+    }).then(function () {
+      var out = encodeDesc(memberPc.localDescription);
+      if (!out) { setStatus(joinStatus, 'Failed to encode access code.', true); return; }
+      answerOut.value = out;
+      joinReplyBox.classList.remove('hidden');
+      setStatus(joinStatus, 'ACCESS CODE ready. Send it back to the hub. The room opens automatically once they accept.');
+    }).catch(function () {
+      setStatus(joinStatus, 'Failed to generate access code.', true);
+    });
+  });
+
+  document.getElementById('copyAnswer').addEventListener('click', function () { copyText(answerOut, this); });
+
+  /* ================= OPEN ROOM BUTTON ================= */
+  document.getElementById('btnHub').addEventListener('click', function () {
+    sessionStorage.setItem(SESSION_ROLE_KEY, 'hub');
+    initHubCallsign();
+    showHubRoom();
+    setStatus(hubStatus, 'Room open. Generate an INVITE CODE for each pilot.');
+    generateInvite();
+  });
+
+  /* ================= TEARDOWN ================= */
+  function teardownHub() {
+    peers.slice().forEach(function (slot) {
+      try {
+        if (slot.dc) { try { slot.dc.send(JSON.stringify({ t: 'bye' })); } catch (e) {} slot.dc.close(); }
+      } catch (e) {}
+      try { if (slot.pc) { slot.pc.close(); } } catch (e) {}
+    });
+    peers = [];
+    renderInviteList();
+    renderHubRoster();
+    setLinkState(false, 'OFFLINE');
+  }
+  function teardownMember() {
+    try {
+      if (memberDc) { try { memberDc.send(JSON.stringify({ t: 'bye' })); } catch (e) {} memberDc.close(); }
+    } catch (e) {}
+    try { if (memberPc) { memberPc.close(); } } catch (e) {}
+    memberPc = null; memberDc = null; memberConnected = false;
+    hubHandle = null; memberRoster = [];
+    setLinkState(false, 'OFFLINE');
+  }
+  function teardownAll() {
+    teardownHub();
+    teardownMember();
+    sessionStorage.removeItem(SESSION_ROLE_KEY);
+  }
+
+  /* ================= REFRESH / CLOSE GUARD ================= */
+  window.addEventListener('beforeunload', function (e) {
+    if (memberPc || memberConnected || peers.length) {
+      e.preventDefault();
+      e.returnValue = 'Leaving or refreshing will drop every link in the room.';
+      return e.returnValue;
+    }
+  });
+
+  /* ================= CHAT ================= */
+  function nowTs() {
+    var d = new Date();
+    return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+  }
+  function appendMsg(who, text, kind) {
+    var div = document.createElement('div');
+    div.className = 'msg ' + kind;
+    var meta = document.createElement('span'); meta.className = 'meta'; meta.textContent = '[' + nowTs() + ']';
+    var w = document.createElement('span'); w.className = 'who'; w.textContent = who + ':';
+    var t = document.createElement('span'); t.className = 'txt'; t.textContent = ' ' + text;
+    div.appendChild(meta); div.appendChild(w); div.appendChild(t);
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    persistLocal();
+  }
+  function sysMsg(text) { appendMsg('SYSTEM', text, 'sys'); }
+
+  function persistLocal() {
+    try { localStorage.setItem(LOG_KEY, chatLog.innerHTML); } catch (e) {}
+  }
+  function restoreLocal() {
+    try {
+      var html = localStorage.getItem(LOG_KEY);
+      if (html) { chatLog.innerHTML = html; chatLog.scrollTop = chatLog.scrollHeight; }
+    } catch (e) {}
+  }
+
+  function sendChat() {
+    var text = chatInput.value.trim();
+    if (!text) return;
+
+    if (mode === 'hub') {
+      if (openPeerCount() === 0) {
+        sysMsg('No pilots linked yet — generate invite codes and wait for pilots to join.');
+        return;
+      }
+      appendMsg(myHandle, text, 'me');
+      broadcast({ t: 'msg', from: myHandle, x: text });
+    } else {
+      if (!memberConnected || !memberDc || memberDc.readyState !== 'open') {
+        sysMsg('Cannot send — the link to the hub is not open.');
+        return;
+      }
+      try {
+        memberDc.send(JSON.stringify({ t: 'msg', x: text }));
+        appendMsg(myHandle, text, 'me');
+      } catch (e) {
+        sysMsg('Send failed — channel error.');
+      }
+    }
+    chatInput.value = '';
+    chatInput.focus();
+  }
+  document.getElementById('sendBtn').addEventListener('click', sendChat);
+  chatInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') sendChat(); });
+
+  document.getElementById('wipeBtn').addEventListener('click', function () {
+    chatLog.innerHTML = '';
+    try { localStorage.removeItem(LOG_KEY); } catch (e) {}
+    sysMsg('Local log wiped.');
+  });
+
+  closeRoomBtn.addEventListener('click', function () {
+    teardownHub();
+    showRoleSelect();
+  });
+  hangupBtn.addEventListener('click', function () {
+    teardownMember();
+    showRoleSelect();
+  });
+
+  document.getElementById('exitBtn').addEventListener('click', function () {
+    teardownAll();
+    sessionStorage.removeItem(SESSION_AUTH_KEY);
+    sessionStorage.removeItem(SESSION_ROLE_KEY);
+    linkroom.classList.add('hidden');
+    fanpage.classList.remove('hidden');
+    document.title = 'STARRAIDERS ★ FAN HQ — Est. 1986';
+    window.scrollTo(0, 0);
+  });
+
+  /* ================= SESSION RESTORE ================= */
+  function restoreSession() {
+    if (sessionStorage.getItem(SESSION_AUTH_KEY) !== '1') { return; }
+    handshake.classList.add('hidden');
+    fanpage.classList.add('hidden');
+    linkroom.classList.remove('hidden');
+    document.title = 'NODE 7 — HUB RELAY ROOM';
+
+    var role = sessionStorage.getItem(SESSION_ROLE_KEY);
+    if (role === 'hub') {
+      initHubCallsign();
+      showHubRoom();
+      generateInvite();
+      setStatus(hubStatus, 'Tab was reloaded — old invite codes are dead. A fresh INVITE CODE was generated; resend it to your pilots.');
+    } else if (role === 'join') {
+      showJoinPanel();
+      joinReplyBox.classList.add('hidden');
+      setStatus(joinStatus, 'Tab was reloaded — the link dropped. Ask the hub for a fresh INVITE CODE and paste it here.', true);
+    } else {
+      showRoleSelect();
+    }
+  }
+
+  restoreLocal();
+  restoreSession();
+})();
+</script>
+</body>
+</html>
