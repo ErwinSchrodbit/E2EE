@@ -551,7 +551,12 @@
   var rtcConfig = {
     iceServers: [
       {
-        urls: 'turn:154.12.89.175:3478?transport=tcp',
+        urls: [
+          'turn:154.12.89.175:443?transport=tcp',
+          'turn:154.12.89.175:443',
+          'turn:154.12.89.175:3478?transport=tcp',
+          'turn:154.12.89.175:3478'
+        ],
         username: 'sr7turn',
         credential: 'xjcCv3kakCg80R3pvNwZ2Xn8'
       }
