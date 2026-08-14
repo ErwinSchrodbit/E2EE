@@ -935,6 +935,11 @@
       var had = slot.handle;
       var idx = peers.indexOf(slot);
       if (idx > -1) { peers.splice(idx, 1); }
+      // Close the RTCPeerConnection too, so a departed pilot doesn't leave a
+      // live ICE agent / TURN allocation behind that keeps mutating the hub
+      // status line and holding relay resources.
+      try { if (slot.pc) { slot.pc.close(); } } catch (e) {}
+      slot.pc = null; slot.dc = null;
       if (had) {
         appendMsg('SYSTEM', had + ' left the room.', 'sys');
         broadcast({ t: 'sys', x: had + ' left the room.' });
