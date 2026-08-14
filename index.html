@@ -765,7 +765,10 @@
       if (!peer) { resolve(); return; }
       if (peer.iceGatheringState === 'complete') { resolve(); return; }
       var done = false;
-      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 4000);
+      // Wait for gathering to finish (up to 15s) so TURN relay candidates
+      // collected later are included in the code. A short fixed timeout
+      // would cut them off on slow mobile networks and break cross-network links.
+      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 15000);
       peer.addEventListener('icegatheringstatechange', function h() {
         if (peer.iceGatheringState === 'complete' && !done) {
           done = true; clearTimeout(timer);
