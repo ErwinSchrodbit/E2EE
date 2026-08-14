@@ -757,9 +757,10 @@
       if (!peer) { resolve(); return; }
       if (peer.iceGatheringState === 'complete') { resolve(); return; }
       var done = false;
-      // Wait for ICE gathering to finish (up to 8s). With TURN-over-TCP the
-      // relay candidate is usually ready within a second or two.
-      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 8000);
+      // Wait for ICE gathering to finish (up to 12s). TURN-over-TCP needs a
+      // little longer to allocate a relay candidate on slow mobile networks,
+      // and a too-short cap would leave the SDP without a usable relay path.
+      var timer = setTimeout(function () { if (!done) { done = true; resolve(); } }, 12000);
       peer.addEventListener('icegatheringstatechange', function h() {
         if (peer.iceGatheringState === 'complete' && !done) {
           done = true; clearTimeout(timer);
@@ -774,9 +775,25 @@
     peer.oniceconnectionstatechange = function () {
       var s = peer.iceConnectionState;
       if (s === 'failed') {
-        setStatus(statusEl, 'Connection FAILED. The network path is likely too restrictive for a direct link.', true);
+        setStatus(statusEl, 'ICE FAILED [' + describeCandidates(peer) + ']. No usable network path.', true);
+      } else {
+        setStatus(statusEl, 'ICE state: ' + s + ' [' + describeCandidates(peer) + ']', false);
       }
     };
+  }
+
+  function describeCandidates(pc) {
+    try {
+      var sdp = (pc && pc.localDescription && pc.localDescription.sdp) || '';
+      var re = /a=candidate:[^\r\n]+/g, m, host = 0, srflx = 0, relay = 0;
+      while ((m = re.exec(sdp)) !== null) {
+        var line = m[0];
+        if (line.indexOf(' typ host ') >= 0) host++;
+        else if (line.indexOf(' typ srflx ') >= 0) srflx++;
+        else if (line.indexOf(' typ relay ') >= 0) relay++;
+      }
+      return 'host=' + host + ' srflx=' + srflx + ' relay=' + relay;
+    } catch (e) { return 'candidates=?'; }
   }
 
   function copyText(textarea, btn) {
@@ -953,7 +970,7 @@
       slot.state = slot.code ? 'ready' : 'closed';
       renderInviteList();
       if (slot.code) {
-        setStatus(hubStatus, 'INVITE #' + slot.id + ' ready. Send it to a pilot and wait for their ACCESS CODE.');
+        setStatus(hubStatus, 'INVITE #' + slot.id + ' ready [' + describeCandidates(slot.pc) + ']. Send it to a pilot and wait for their ACCESS CODE.');
       } else {
         setStatus(hubStatus, 'Failed to encode INVITE #' + slot.id + '.', true);
       }
@@ -1092,7 +1109,7 @@
       if (!out) { setStatus(joinStatus, 'Failed to encode access code.', true); return; }
       answerOut.value = out;
       joinReplyBox.classList.remove('hidden');
-      setStatus(joinStatus, 'ACCESS CODE ready. Send it back to the hub. The room opens automatically once they accept.');
+      setStatus(joinStatus, 'ACCESS CODE ready [' + describeCandidates(memberPc) + ']. Send it back to the hub. The room opens automatically once they accept.');
     }).catch(function () {
       setStatus(joinStatus, 'Failed to generate access code.', true);
     });
